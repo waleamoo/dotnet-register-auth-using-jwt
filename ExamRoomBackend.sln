@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamRoomBackend", "ExamRoomBackend\ExamRoomBackend.csproj", "{DEE38058-FE71-452B-B9C1-11903FAD568D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEE38058-FE71-452B-B9C1-11903FAD568D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE38058-FE71-452B-B9C1-11903FAD568D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE38058-FE71-452B-B9C1-11903FAD568D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE38058-FE71-452B-B9C1-11903FAD568D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9530EAC7-0FB1-4E3B-BF28-71934A09660A}
+	EndGlobalSection
+EndGlobal
