@@ -85,3 +85,6 @@ C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\obj\Debug\net6.0\refint\Exa
 C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\obj\Debug\net6.0\ExamRoomBackend.pdb
 C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\obj\Debug\net6.0\ExamRoomBackend.genruntimeconfig.cache
 C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\obj\Debug\net6.0\ref\ExamRoomBackend.dll
+C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\bin\Debug\net6.0\Scrutor.dll
+C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\Ola\Desktop\ExamRoomBackend\ExamRoomBackend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

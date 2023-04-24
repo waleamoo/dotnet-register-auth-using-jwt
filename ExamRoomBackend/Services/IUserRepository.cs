@@ -16,5 +16,7 @@ namespace ExamRoomBackend.Services
         Task<bool> DeleteCandidiate(int id);
         Task<bool> VerifyUser(string token);
         Task<bool> EmailInActiveUsers();
+        // retrieve the user claims 
+        string GetMyName();
     }
 }

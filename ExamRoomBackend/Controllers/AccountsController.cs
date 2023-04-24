@@ -1,6 +1,7 @@
 ﻿using ExamRoomBackend.Models;
 using ExamRoomBackend.Models.DTO;
 using ExamRoomBackend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -43,7 +44,16 @@ namespace ExamRoomBackend.Controllers
             return Ok(loginResponse);
         }
 
-        
+        [HttpGet("GetMe"), Authorize]
+        public ActionResult<string> GetMe()
+        {
+            var userName = _userRepository.GetMyName();
+            return Ok(userName);
+            //var userName = User?.Identity?.Name;
+            //var userName2 = User.FindFirstValue(ClaimTypes.Name);
+            //var role = User.FindFirstValue(ClaimTypes.Role);
+            //return Ok(new { userName, userName2, role });
+        }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterReqDto registerReqDto)

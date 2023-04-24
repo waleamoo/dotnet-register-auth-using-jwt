@@ -22,35 +22,37 @@ namespace ExamRoomBackend.Services
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly IEmailService _emailService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserRepository(DataContext context, IMapper mapper, IConfiguration config, IEmailService emailService)
+        public UserRepository(DataContext context, IMapper mapper, IConfiguration config, IEmailService emailService, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
             _config = config;
-            _emailService = emailService;   
+            _emailService = emailService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<User> Authenticate(string email, string password)
+        public async Task<User> Authenticate(string email, string passwordText)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email && x.IsActive == true); // check email and IsActive 
             if (user == null || user.PasswordKey == null)
                 return null;
             // verify the user password 
-            if (!MatchPasswordHash(password, user.PasswordHash, user.PasswordKey)) // login req password 
+            if (!MatchPasswordHash(passwordText, user.PasswordHash, user.PasswordKey)) // login req password 
                 return null;
             return user;
         }
 
-        private bool MatchPasswordHash(string password, byte[] passwordHash, byte[] passwordKey)
+        private bool MatchPasswordHash(string passwordText, byte[] passwordHash, byte[] passwordKey)
         {
             using (var hmac = new HMACSHA512(passwordKey))
             {
-                var hashPassword = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var hashPassword = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passwordText));
                 // compare the byte array 
                 for (int i = 0; i < hashPassword.Length; i++)
                 {
-                    if (hashPassword[i] != passwordKey[i])
+                    if (hashPassword[i] != passwordHash[i])
                         return false;
                 }
                 return true;
@@ -252,6 +254,7 @@ namespace ExamRoomBackend.Services
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, user.Email),
+                //new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
             // create signing credentials 
@@ -268,5 +271,14 @@ namespace ExamRoomBackend.Services
             return tokenHandler.WriteToken(token);
         }
 
+        public string GetMyName()
+        {
+            var result = string.Empty;
+            if (_httpContextAccessor.HttpContext != null)
+            {
+                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            }
+            return result;
+        }
     }
 }

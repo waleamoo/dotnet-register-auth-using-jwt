@@ -35,6 +35,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ILocationService, Location>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddHttpClient<ITwilioRestClient, TwilioClient>();
+// add the http context accessor - for retrieving the currently authorized/logged in user 
+builder.Services.AddHttpContextAccessor();
 // add the database context 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // jwt support 
@@ -59,7 +61,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+// add authentication middleware 
 app.UseAuthentication();
 app.UseAuthorization();
 
